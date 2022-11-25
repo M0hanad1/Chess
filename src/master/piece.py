@@ -61,6 +61,7 @@ class Piece:
             New position to change to.
         """
         self.position = new_position
+        self.position_letters = self.convert_to_letters(new_position)
 
     def change_available_positions(self, new_available_positions: list[list[int]]) -> None:
         """Change the Piece available positions.
