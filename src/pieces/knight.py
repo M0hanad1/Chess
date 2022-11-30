@@ -17,38 +17,28 @@ class Knight(Piece):
         super().__init__(position, available_positions, color)
 
     def get_available_position(self) -> list[list[int]]:
-        """Get all the available positions for the Knight.
+        """Get the available positions for the Knight to move to.
 
         Returns
         -------
         list[list[int]]
             Available positions for the Knight to move to.
         """
-        return self.check_available_positions([
+        all_available_positions = [
             [self.position[0]+2, self.position[1]+1], [self.position[0]-2, self.position[1]+1], # 2Right 1Up, 2Left 1Up.
             [self.position[0]+2, self.position[1]-1], [self.position[0]-2, self.position[1]-1], # 2Right 1Down, 2Left 1Down.
             [self.position[0]+1, self.position[1]+2], [self.position[0]+1, self.position[1]-2], # 2Up 1Right, 2Down 1Right.
             [self.position[0]-1, self.position[1]+2], [self.position[0]-1, self.position[1]-2], # 2Up 1Left, 2Down 1Left.
-        ])
+        ]
+        positions_result = all_available_positions.copy()
 
-    def check_available_positions(self, positions: list[list[int]]) -> list[list[int]]:
-        """Check if the positions are available.
-
-        Parameters
-        ----------
-        positions : list[list[int]]
-            All available positions of the Knight.
-
-        Returns
-        -------
-        list[list[int]]
-            Available positions for the Knight to move to.
-        """
-        positions_result = positions.copy()
-
-        for i in positions:
+        for i in all_available_positions:
             # Check if [the position is available on the board, there's no piece from the same color in this position]
-            if not (position_in_letters := self.convert_to_letters(i)) or (self.board[position_in_letters] and self.board[position_in_letters].color == self.color):
+            try:
+                if not (position_in_letters := self.convert_to_letters(i)) or (self.board[position_in_letters] and self.board[position_in_letters].color == self.color):
+                    positions_result.remove(i)
+
+            except IndexError:
                 positions_result.remove(i)
 
         return positions_result

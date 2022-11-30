@@ -46,11 +46,10 @@ class Piece:
         str
             Position in letters.
         """
-        try:
-            return Piece.POSITIONS_X[position[0]]+Piece.POSITIONS_Y[position[1]]
+        if (position[0] <= -1) or (position[1] <= -1):
+            raise IndexError
 
-        except IndexError:
-            return
+        return Piece.POSITIONS_X[position[0]]+Piece.POSITIONS_Y[position[1]]
 
     def change_position(self, new_position: list[int]) -> None:
         """Change the Piece position.
