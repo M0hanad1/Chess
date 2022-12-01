@@ -26,22 +26,22 @@ class Rook(Piece):
         """
         available_positions = []
         directions = [0, 1, 2, 3]
-        num = 1 # Number to add/sub from the piece position
+        num = 1 # Number to add/sub from the piece position.
 
         while directions:
-            # Get all the direction for the Rook 
+            # Get all the direction for the Rook.
             positions = [
-                [self.position[0]+num, self.position[1]], [self.position[0], self.position[1]+num], # Right, Up
-                [self.position[0]-num, self.position[1]], [self.position[0], self.position[1]-num] # Left, Down
+                [self.position[0]+num, self.position[1]], [self.position[0], self.position[1]+num], # Right, Up.
+                [self.position[0]-num, self.position[1]], [self.position[0], self.position[1]-num] # Left, Down.
                 ]
 
             for i in directions.copy():
                 try:
-                    # Check if [the position is available on the board, there's no piece from the same color in this position]
-                    if (temp := self.board[self.convert_to_letters(positions[i])]):
+                    # Check if [the position is available on the board, there's no piece from the same color in this position].
+                    if (position_on_board := self.board[self.convert_to_letters(positions[i])]):
                         directions.remove(i)
 
-                        if temp.color == self.color:
+                        if position_on_board.color == self.color:
                             continue
 
                     available_positions.append(positions[i])

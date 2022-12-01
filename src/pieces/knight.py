@@ -35,7 +35,7 @@ class Knight(Piece):
         for i in all_available_positions:
             # Check if [the position is available on the board, there's no piece from the same color in this position]
             try:
-                if not (position_in_letters := self.convert_to_letters(i)) or (self.board[position_in_letters] and self.board[position_in_letters].color == self.color):
+                if (position_on_board := self.board[self.convert_to_letters(i)]) and position_on_board.color == self.color:
                     positions_result.remove(i)
 
             except IndexError:
