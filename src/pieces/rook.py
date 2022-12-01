@@ -1,4 +1,5 @@
 from src.master.piece import Piece
+import discord
 
 
 class Rook(Piece):
@@ -25,9 +26,10 @@ class Rook(Piece):
             Available positions for the Rook to move to.
         """
         available_positions = []
-        directions = [0, 1, 2, 3]
+        directions = [0, 1, 2, 3] # Index of the available positions.
         num = 1 # Number to add/sub from the piece position.
 
+        
         while directions:
             # Get all the direction for the Rook.
             positions = [
@@ -36,17 +38,17 @@ class Rook(Piece):
                 ]
 
             for i in directions.copy():
+                # Check if [the position is available on the board, there's no piece from the same color in this position].
                 try:
-                    # Check if [the position is available on the board, there's no piece from the same color in this position].
-                    if (position_on_board := self.board[self.convert_to_letters(positions[i])]):
-                        directions.remove(i)
+                    if (position_on_board := self.board[self.convert_to_letters(positions[i])]): # Check if there's a piece on this position.
+                        directions.remove(i) # remove this direction.
 
                         if position_on_board.color == self.color:
                             continue
 
-                    available_positions.append(positions[i])
+                    available_positions.append(positions[i]) # Add the position if it's not the same color.
 
-                except IndexError:
+                except IndexError: # Position is not available on the board.
                     directions.remove(i)
 
             num += 1

@@ -39,22 +39,22 @@ class Pawn(Piece):
             [self.position[0], self.position[1]+1], [self.position[0]+1, self.position[1]+1], # 1Up, 1Right 1Up.
             [self.position[0]-1, self.position[1]+1], [self.position[0], self.position[1]+2] # 1Left 1Up, 2Up.
         ]
-        positions_result = all_available_positions.copy()
+        available_positions = all_available_positions.copy()
 
         for i in range(len(all_available_positions)):
             position = all_available_positions[i]
 
             # Check if [the position is available on the board, there's no piece from the same color in this position].
             try:
-                if (position_on_board := self.board[self.convert_to_letters(position)]):
-                    if i not in [1, 2] or self.color == position_on_board.color:
-                        positions_result.remove(position)
+                if (position_on_board := self.board[self.convert_to_letters(position)]): # Check if there's a piece on this position.
+                    if i not in [1, 2] or self.color == position_on_board.color: # Check if it's not moving to the right/left, or if it's the same color.
+                        available_positions.remove(position) # remove this position.
 
-                else:
-                    if i == 3 and (self.check_move() or all_available_positions[0] not in positions_result):
-                        positions_result.remove(position)
+                else: # if there's no piece in this position.
+                    if i == 3 and (self.check_move() or all_available_positions[0] not in available_positions): # Check if it's moving forward twice, and check if [it's moved from it's first place, position not available in the board].
+                        available_positions.remove(position)
 
-            except IndexError:
-                positions_result.remove(position)
+            except IndexError: # Position not available in the board.
+                available_positions.remove(position)
 
-        return positions_result
+        return available_positions

@@ -24,21 +24,22 @@ class Knight(Piece):
         list[list[int]]
             Available positions for the Knight to move to.
         """
+        # All the available positions to move to.
         all_available_positions = [
             [self.position[0]+2, self.position[1]+1], [self.position[0]-2, self.position[1]+1], # 2Right 1Up, 2Left 1Up.
             [self.position[0]+2, self.position[1]-1], [self.position[0]-2, self.position[1]-1], # 2Right 1Down, 2Left 1Down.
             [self.position[0]+1, self.position[1]+2], [self.position[0]+1, self.position[1]-2], # 2Up 1Right, 2Down 1Right.
             [self.position[0]-1, self.position[1]+2], [self.position[0]-1, self.position[1]-2], # 2Up 1Left, 2Down 1Left.
         ]
-        positions_result = all_available_positions.copy()
+        available_positions = all_available_positions.copy()
 
         for i in all_available_positions:
-            # Check if [the position is available on the board, there's no piece from the same color in this position]
+            # Check if [the position is available on the board, there's no piece from the same color in this position].
             try:
-                if (position_on_board := self.board[self.convert_to_letters(i)]) and position_on_board.color == self.color:
-                    positions_result.remove(i)
+                if (position_on_board := self.board[self.convert_to_letters(i)]) and position_on_board.color == self.color: # Check if there's a piece on this position with the same color.
+                    available_positions.remove(i) # Remove the position.
 
-            except IndexError:
-                positions_result.remove(i)
+            except IndexError: # Position not available on the board.
+                available_positions.remove(i)
 
-        return positions_result
+        return available_positions
