@@ -2,38 +2,48 @@ from src.master.piece import Piece
 
 
 class Pawn(Piece):
-    """Pawn piece class.
+    '''Pawn piece class.
 
         Parameters
         ----------
-        position : list[int]
+        position : :class:`list`
             Pawn position on the board.
-        available_positions : list[list[int]]
+        available_positions : :class:`list`
             Available positions for the Pawn to move to.
-        color : str
+        color : :class:`str`
             Pawn color.
-    """
-    def __init__(self, position: list[int], available_positions: list[list[int]], color: str) -> None:
+    '''
+    def __init__(self, position: list, available_positions: list, color: str) -> None:
         super().__init__(position, available_positions, color)
 
     def check_move(self) -> bool:
-        """Check if the Pawn has moved from it first place.
+        '''Check if the Pawn has moved from it first place.
 
         Returns
         -------
-        bool
-            True if it moved, else false.
-        """
+        :class:`bool`
+            ``True`` if it moved, else ``False``.
+        '''
         return True if self.position[1] != 1 else False
 
-    def get_available_position(self) -> list[list[int]]:
-        """Get the available positions for the Pawn to move to.
+    def check_replace(self) -> bool:
+        '''Check if the Pawn reach the end of the board.
 
         Returns
         -------
-        list[list[int]]
+        :class:`bool`
+            ``True`` if it reached the end, else ``False``.
+        '''
+        return True if self.position[1] == 7 else False
+
+    def get_available_position(self) -> list:
+        '''Get the available positions for the Pawn to move to.
+
+        Returns
+        -------
+        :class:`list`
             Available positions for the Pawn to move to.
-        """
+        '''
 
         all_available_positions = [
             [self.position[0], self.position[1]+1], [self.position[0]+1, self.position[1]+1], # 1Up, 1Right 1Up.

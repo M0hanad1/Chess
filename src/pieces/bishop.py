@@ -2,28 +2,28 @@ from src.master.piece import Piece
 
 
 class Bishop(Piece):
-    """Bishop piece class.
+    '''Bishop piece class.
 
         Parameters
         ----------
-        position : list[int]
+        position : :class:`list`
             Bishop position on the board.
-        available_positions : list[list[int]]
+        available_positions : :class:`list`
             Available positions for the Bishop to move to.
-        color : str
+        color : :class:`str`
             Bishop color.
-    """
-    def __init__(self, position: list[int], available_positions: list[list[int]], color: str) -> None:
+    '''
+    def __init__(self, position: list, available_positions: list, color: str) -> None:
         super().__init__(position, available_positions, color)
 
-    def get_available_position(self) -> list[list[int]]:
-        """Get the available positions for the Bishop to move to.
+    def get_available_position(self) -> list:
+        '''Get the available positions for the Bishop to move to.
 
         Returns
         -------
-        list[list[int]]
+        :class:`list`
             Available positions for the Bishop to move to.
-        """
+        '''
         available_positions = []
         directions = [0, 1, 2, 3] # Index of the available positions.
         num = 1 # Number to add/sub from the piece position.

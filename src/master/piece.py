@@ -1,17 +1,17 @@
 class Piece:
-    """Chess pieces master class.
+    '''Chess pieces master class.
 
         Parameters
         ----------
-        position : list[int]
+        position : :class:`list`
             Piece position on the board.
-        available_positions : list[list[int]]
+        available_positions : :class:`list`
             Available positions for the Piece to move to.
-        color : str
+        color : :class:`str`
             Piece color.
-    """
-    POSITIONS_X = ["a", "b", "c", "d", "e", "f", "g", "h"]
-    POSITIONS_Y = ["1", "2", "3", "4", "5", "6", "7", "8"]
+    '''
+    POSITIONS_X = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    POSITIONS_Y = ['1', '2', '3', '4', '5', '6', '7', '8']
     board = {
         'a1': None, 'a2': None, 'a3': None, 'a4': None, 'a5': None, 'a6': None, 'a7': None, 'a8': None,
         'b1': None, 'b2': None, 'b3': None, 'b4': None, 'b5': None, 'b6': None, 'b7': None, 'b8': None,
@@ -24,7 +24,7 @@ class Piece:
         }
     pieces = []
 
-    def __init__(self, position: list[int], available_positions: list[list[int]], color: str) -> None:
+    def __init__(self, position: list, available_positions: list, color: str) -> None:
         self.position = position
         self.position_letters = self.convert_to_letters(position)
         self.available_positions = available_positions
@@ -33,48 +33,52 @@ class Piece:
         Piece.board[self.position_letters] = self
 
     @staticmethod
-    def convert_to_letters(position: list[int]) -> str:
-        """Convert position from int to letters.
+    def convert_to_letters(position: list) -> str:
+        '''Convert position from int to letters.
 
         Parameters
         ----------
-        position : list[int]
+        position : :class:`list`
             Position to convert from.
 
         Returns
         -------
-        str
+        :class:`str`
             Position in letters.
-        """
+
+        Raises
+        ------
+        :class:`IndexError`
+            Position was not available in the board.
+        '''        
         if (position[0] <= -1) or (position[1] <= -1):
             raise IndexError
 
         return Piece.POSITIONS_X[position[0]]+Piece.POSITIONS_Y[position[1]]
 
-    def change_position(self, new_position: list[int]) -> None:
-        """Change the Piece position.
+    def change_position(self, new_position: list) -> None:
+        '''Change the Piece position.
 
         Parameters
         ----------
-        new_position : list[int]
+        new_position : :class:`list`
             New position to change to.
-        """
+        '''
         self.position = new_position
         self.position_letters = self.convert_to_letters(new_position)
 
-    def change_available_positions(self, new_available_positions: list[list[int]]) -> None:
-        """Change the Piece available positions.
+    def change_available_positions(self, new_available_positions: list) -> None:
+        '''Change the Piece available positions.
 
         Parameters
         ----------
-        new_available_positions : list[list[int]]
+        new_available_positions : :class:`list`
             New available positions to change to.
-        """
+        '''
         self.available_positions = new_available_positions
 
     def remove_piece(self) -> None:
-        """Remove the Piece from the game.
-        """
+        '''Remove the Piece from the game.'''
         self.board[self.position_letters] = None
         self.pieces.remove(self)
         del self

@@ -2,28 +2,28 @@ from src.master.piece import Piece
 
 
 class Knight(Piece):
-    """Knight piece class.
+    '''Knight piece class.
 
         Parameters
         ----------
-        position : list[int]
+        position : :class:`list`
             Knight position on the board.
-        available_positions : list[list[int]]
+        available_positions : :class:`list`
             Available positions for the Knight to move to.
-        color : str
+        color : :class:`str`
             Knight color.
-    """
-    def __init__(self, position: list[int], available_positions: list[list[int]], color: str) -> None:
+    '''
+    def __init__(self, position: list, available_positions: list, color: str) -> None:
         super().__init__(position, available_positions, color)
 
-    def get_available_position(self) -> list[list[int]]:
-        """Get the available positions for the Knight to move to.
+    def get_available_position(self) -> list:
+        '''Get the available positions for the Knight to move to.
 
         Returns
         -------
-        list[list[int]]
+        :class:`list`
             Available positions for the Knight to move to.
-        """
+        '''
         # All the available positions to move to.
         all_available_positions = [
             [self.position[0]+2, self.position[1]+1], [self.position[0]-2, self.position[1]+1], # 2Right 1Up, 2Left 1Up.

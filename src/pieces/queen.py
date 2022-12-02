@@ -1,38 +1,40 @@
 from src.master.piece import Piece
 
 
-class Rook(Piece):
-    '''Rook piece class.
+class Queen(Piece):
+    '''Queen piece class.
 
         Parameters
         ----------
         position : :class:`list`
-            Rook position on the board.
+            Queen position on the board.
         available_positions : :class:`list`
-            Available positions for the Rook to move to.
+            Available positions for the Queen to move to.
         color : :class:`str`
-            Rook color.
+            Queen color.
     '''
     def __init__(self, position: list, available_positions: list, color: str) -> None:
         super().__init__(position, available_positions, color)
 
     def get_available_position(self) -> list:
-        '''Get the available positions for the Rook to move to.
+        '''Get the available positions for the Queen to move to.
 
         Returns
         -------
         :class:`list`
-            Available positions for the Rook to move to.
+            Available positions for the Queen to move to.
         '''
         available_positions = []
-        directions = [0, 1, 2, 3] # Index of the available positions.
+        directions = [0, 1, 2, 3, 4, 5, 6, 7] # Index of the available positions.
         num = 1 # Number to add/sub to/from the piece position.
 
         while directions:
             # Get all the direction for the Rook.
             positions = [
                 [self.position[0]+num, self.position[1]], [self.position[0], self.position[1]+num], # Right, Up.
-                [self.position[0]-num, self.position[1]], [self.position[0], self.position[1]-num] # Left, Down.
+                [self.position[0]-num, self.position[1]], [self.position[0], self.position[1]-num], # Left, Down.
+                [self.position[0]+num, self.position[1]+num], [self.position[0]+num, self.position[1]-num], # Right Up, Right Down.
+                [self.position[0]-num, self.position[1]+num], [self.position[0]-num, self.position[1]-num] # Left Up, Left Down.
                 ]
 
             for i in directions.copy():
