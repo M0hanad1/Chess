@@ -1,29 +1,28 @@
 from src.master.piece import Piece
-import discord
 
 
-class Rook(Piece):
-    """Rook piece class.
+class Bishop(Piece):
+    """Bishop piece class.
 
         Parameters
         ----------
         position : list[int]
-            Rook position on the board.
+            Bishop position on the board.
         available_positions : list[list[int]]
-            Available positions for the Rook to move to.
+            Available positions for the Bishop to move to.
         color : str
-            Rook color.
+            Bishop color.
     """
     def __init__(self, position: list[int], available_positions: list[list[int]], color: str) -> None:
         super().__init__(position, available_positions, color)
 
     def get_available_position(self) -> list[list[int]]:
-        """Get the available positions for the Rook to move to.
+        """Get the available positions for the Bishop to move to.
 
         Returns
         -------
         list[list[int]]
-            Available positions for the Rook to move to.
+            Available positions for the Bishop to move to.
         """
         available_positions = []
         directions = [0, 1, 2, 3] # Index of the available positions.
@@ -32,8 +31,8 @@ class Rook(Piece):
         while directions:
             # Get all the direction for the Rook.
             positions = [
-                [self.position[0]+num, self.position[1]], [self.position[0], self.position[1]+num], # Right, Up.
-                [self.position[0]-num, self.position[1]], [self.position[0], self.position[1]-num] # Left, Down.
+                [self.position[0]+num, self.position[1]+num], [self.position[0]+num, self.position[1]-num], # Right Up, Right Down.
+                [self.position[0]-num, self.position[1]+num], [self.position[0]-num, self.position[1]-num] # Left Up, Left Down.
                 ]
 
             for i in directions.copy():
