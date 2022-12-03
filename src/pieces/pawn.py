@@ -45,11 +45,12 @@ class Pawn(Piece):
             Available positions for the Pawn to move to.
         '''
 
+        # All the available positions for the Pawn.
         all_available_positions = [
             [self.position[0], self.position[1]+1], [self.position[0]+1, self.position[1]+1], # 1Up, 1Right 1Up.
             [self.position[0]-1, self.position[1]+1], [self.position[0], self.position[1]+2] # 1Left 1Up, 2Up.
         ]
-        available_positions = all_available_positions.copy()
+        available_positions = all_available_positions.copy() # Actual available positions.
 
         for i in range(len(all_available_positions)):
             position = all_available_positions[i]

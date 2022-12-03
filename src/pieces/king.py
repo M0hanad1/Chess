@@ -1,35 +1,36 @@
 from src.master.piece import Piece
 
 
-class Knight(Piece):
-    '''Knight piece class.
+class King(Piece):
+    '''King piece class.
 
         Parameters
         ----------
         position : :class:`list`
-            Knight position on the board.
+            King position on the board.
         available_positions : :class:`list`
-            Available positions for the Knight to move to.
+            Available positions for the King to move to.
         color : :class:`str`
-            Knight color.
+            King color.
     '''
     def __init__(self, position: list, available_positions: list, color: str) -> None:
         super().__init__(position, available_positions, color)
 
     def get_available_position(self) -> list:
-        '''Get the available positions for the Knight to move to.
+        '''Get the available positions for the King to move to.
 
         Returns
         -------
         :class:`list`
-            Available positions for the Knight to move to.
+            Available positions for the King to move to.
         '''
-        # All the available positions for the Knight.
+
+        # All the available positions for the King.
         all_available_positions = [
-            [self.position[0]+2, self.position[1]+1], [self.position[0]-2, self.position[1]+1], # 2Right 1Up, 2Left 1Up.
-            [self.position[0]+2, self.position[1]-1], [self.position[0]-2, self.position[1]-1], # 2Right 1Down, 2Left 1Down.
-            [self.position[0]+1, self.position[1]+2], [self.position[0]+1, self.position[1]-2], # 2Up 1Right, 2Down 1Right.
-            [self.position[0]-1, self.position[1]+2], [self.position[0]-1, self.position[1]-2], # 2Up 1Left, 2Down 1Left.
+            [self.position[0]+1, self.position[1]], [self.position[0], self.position[1]+1], # Right, Up.
+            [self.position[0]-1, self.position[1]], [self.position[0], self.position[1]-1], # Left, Down.
+            [self.position[0]+1, self.position[1]+1], [self.position[0]+1, self.position[1]-1], # Right Up, Right Down.
+            [self.position[0]-1, self.position[1]+1], [self.position[0]-1, self.position[1]-1] # Left Up, Left Down.
         ]
         available_positions = all_available_positions.copy() # Actual available positions.
 
