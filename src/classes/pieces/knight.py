@@ -1,4 +1,4 @@
-from src.master.piece import Piece
+from src.classes.master.piece import Piece
 
 
 class Knight(Piece):
