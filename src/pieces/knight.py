@@ -10,11 +10,11 @@ class Knight(Piece):
             Knight position on the board.
         available_positions : :class:`list`
             Available positions for the Knight to move to.
-        color : :class:`str`
+        COLOR : :class:`str`
             Knight color.
     '''
-    def __init__(self, position: list, available_positions: list, color: str) -> None:
-        super().__init__(position, available_positions, color)
+    def __init__(self, position: list, available_positions: list, COLOR: str) -> None:
+        super().__init__(position, available_positions, COLOR)
 
     def get_available_position(self) -> list:
         '''Get the available positions for the Knight to move to.
@@ -36,7 +36,7 @@ class Knight(Piece):
         for i in all_available_positions:
             # Check if [the position is available on the board, there's no piece from the same color in this position].
             try:
-                if (position_on_board := self.board[self.convert_to_letters(i)]) and position_on_board.color == self.color: # Check if there's a piece on this position with the same color.
+                if (position_on_board := self.board[self.convert_to_letters(i)]) and position_on_board.COLOR == self.COLOR: # Check if there's a piece on this position with the same color.
                     available_positions.remove(i) # Remove the position.
 
             except IndexError: # Position not available on the board.

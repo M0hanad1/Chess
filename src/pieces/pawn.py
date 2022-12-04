@@ -10,11 +10,11 @@ class Pawn(Piece):
             Pawn position on the board.
         available_positions : :class:`list`
             Available positions for the Pawn to move to.
-        color : :class:`str`
+        COLOR : :class:`str`
             Pawn color.
     '''
-    def __init__(self, position: list, available_positions: list, color: str) -> None:
-        super().__init__(position, available_positions, color)
+    def __init__(self, position: list, available_positions: list, COLOR: str) -> None:
+        super().__init__(position, available_positions, COLOR)
 
     def check_move(self) -> bool:
         '''Check if the Pawn has moved from it first place.
@@ -58,7 +58,7 @@ class Pawn(Piece):
             # Check if [the position is available on the board, there's no piece from the same color in this position].
             try:
                 if (position_on_board := self.board[self.convert_to_letters(position)]): # Check if there's a piece on this position.
-                    if i not in [1, 2] or self.color == position_on_board.color: # Check if it's not moving to the right/left, or if it's the same color.
+                    if i not in [1, 2] or self.COLOR == position_on_board.COLOR: # Check if it's not moving to the right/left, or if it's the same color.
                         available_positions.remove(position) # remove this position.
 
                 else: # if there's no piece in this position.
