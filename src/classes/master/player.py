@@ -18,7 +18,7 @@ class Player:
         self.COLOR = COLOR
         self.ENEMY_COLOR = 'black' if self.COLOR == 'white' else 'black'
 
-        Player.players[self.COLOR] == self
+        Player.players[self.COLOR] = self
 
     def check_checkmate(self) -> bool:
         '''Check if there's a checkmate.
