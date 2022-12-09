@@ -1,3 +1,6 @@
+from src.classes.master.player import Player
+
+
 class Piece:
     '''Chess pieces master class.
 
@@ -14,8 +17,10 @@ class Piece:
     '''
     POSITIONS_X = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     POSITIONS_Y = ['1', '2', '3', '4', '5', '6', '7', '8']
-    white_player = {'king': None, 'pieces': []}
-    black_player = {'king': None, 'pieces': []}
+    players = {
+        'white': Player(None, [], 'white'),
+        'black': Player(None, [], 'black')
+    }
     board = {
         'a1': None, 'a2': None, 'a3': None, 'a4': None, 'a5': None, 'a6': None, 'a7': None, 'a8': None,
         'b1': None, 'b2': None, 'b3': None, 'b4': None, 'b5': None, 'b6': None, 'b7': None, 'b8': None,
@@ -33,13 +38,13 @@ class Piece:
         self.available_positions = available_positions
         self.COLOR = COLOR
         self.IS_KING = IS_KING
-        self.player = Piece.white_player if self.COLOR == 'white' else Piece.black_player
+        self.player = self.players[self.COLOR]
 
         if self.IS_KING:
-            self.player['king'] = self
+            self.player.king = self
 
-        self.player['pieces'] = self
-        Piece.board[self.position_letters] = self
+        self.player.pieces.append(self)
+        self.board[self.position_letters] = self
 
     @staticmethod
     def convert_to_letters(position: list) -> str:
@@ -89,5 +94,5 @@ class Piece:
     def remove_piece(self) -> None:
         '''Remove the Piece from the game.'''
         self.board[self.position_letters] = None
-        self.player['pieces'].remove(self)
+        self.player.remove_piece(self)
         del self
