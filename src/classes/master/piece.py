@@ -39,12 +39,9 @@ class Piece:
         self.COLOR = COLOR
         self.IS_KING = IS_KING
         self.player = self.players[self.COLOR]
-
-        if self.IS_KING:
-            self.player.king = self
-
-        self.player.pieces.append(self)
+        self.player.king = self if self.IS_KING else None
         self.board[self.position_letters] = self
+        self.player.add_piece(self)
 
     @staticmethod
     def convert_to_letters(position: list) -> str:
@@ -96,3 +93,17 @@ class Piece:
         self.board[self.position_letters] = None
         self.player.remove_piece(self)
         del self
+
+    def get_available_positions(self, mode: bool=True) -> list:
+        '''Get the available positions for the Piece to move to.
+
+        Parameters
+        ----------
+        mode : :class:`bool`, optional
+            Check if the available positions will be for the current player turn, by default True.
+
+        Returns
+        -------
+        :class:`list`
+            Available positions for the Piece to move to.
+        '''

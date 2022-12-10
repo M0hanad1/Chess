@@ -16,8 +16,13 @@ class Knight(Piece):
     def __init__(self, position: list, available_positions: list, COLOR: str) -> None:
         super().__init__(position, available_positions, COLOR)
 
-    def get_available_position(self) -> list:
+    def get_available_positions(self, mode: bool=True) -> list:
         '''Get the available positions for the Knight to move to.
+
+        Parameters
+        ----------
+        mode : :class:`bool`, optional
+            Check if the available positions will be for the current player turn, by default True.
 
         Returns
         -------
@@ -42,4 +47,4 @@ class Knight(Piece):
             except IndexError: # Position not available on the board.
                 available_positions.remove(i)
 
-        return available_positions
+        return self.player.check_available_positions(self, available_positions) if mode else available_positions

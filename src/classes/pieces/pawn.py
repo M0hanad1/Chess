@@ -36,8 +36,13 @@ class Pawn(Piece):
         '''
         return True if self.position[1] == 7 else False
 
-    def get_available_position(self) -> list:
+    def get_available_positions(self, mode: bool=True) -> list:
         '''Get the available positions for the Pawn to move to.
+
+        Parameters
+        ----------
+        mode : :class:`bool`, optional
+            Check if the available positions will be for the current player turn, by default True.
 
         Returns
         -------
@@ -68,4 +73,4 @@ class Pawn(Piece):
             except IndexError: # Position not available in the board.
                 available_positions.remove(position)
 
-        return available_positions
+        return self.player.check_available_positions(self, available_positions) if mode else available_positions
